@@ -8,6 +8,20 @@
 #include "linkedList.h"
 
 
+//Function declarations
+void loadMap(struct node * nodeArray[NUM_ROWS][NUM_COLUMNS]){};
+//End of function declarations 
+
+int main(){
+
+    struct node * map[NUM_ROWS][NUM_COLUMNS];
+
+    printf("\n\n****************\n START OF MAP: \n****************\n\n");
+    loadMap(map);
+
+    return 0;
+}
+
 void loadMap(struct node * nodeArray[NUM_ROWS][NUM_COLUMNS]){
 
     FILE *fp;
@@ -15,7 +29,7 @@ void loadMap(struct node * nodeArray[NUM_ROWS][NUM_COLUMNS]){
 
     fp = fopen("map.txt", "r");
 
-    //This loads each value into the array
+    //This loads each node structure from the txt file into the array
     for (int i = 0; i < NUM_ROWS; i++){
         for (int j = 0; j < (NUM_COLUMNS+ 1); j++){
             current_node_data = fgetc(fp);
@@ -28,17 +42,3 @@ void loadMap(struct node * nodeArray[NUM_ROWS][NUM_COLUMNS]){
 
     fclose(fp);
 }
-
-
-
-
-int main(){
-
-    struct node * map[NUM_ROWS][NUM_COLUMNS];
-
-    printf("\n\n****************\n START OF MAP: \n****************\n\n");
-    loadMap(map);
-
-    return 0;
-}
-
