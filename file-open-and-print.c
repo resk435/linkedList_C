@@ -4,26 +4,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
+
+#include "linkedList.h"
+
+
+void loadMap(struct node * nodeArray[NUM_ROWS][NUM_COLUMNS]){
 
     FILE *fp;
-    int c;
-
-    printf("****************\n Start of map: \n****************\n\n");
+    int current_node_data; 
 
     fp = fopen("map.txt", "r");
-    while(1){
-        c = fgetc(fp);
-        if(feof(fp)){
-            break;
+
+    //This loads each value into the array
+    for (int i = 0; i < NUM_ROWS; i++){
+        for (int j = 0; j < (NUM_COLUMNS+ 1); j++){
+            current_node_data = fgetc(fp);
+            printf("%c", current_node_data);
+            if(feof(fp) || current_node_data == '\n'){break;}
+            //We only want the node if it is an actual value on the map so we break for invalid characters
+            nodeArray[i][j] = createNewNode(current_node_data); 
         }
-        printf("%c", c);
-    }
+    }       
 
     fclose(fp);
-
-    return 0;
 }
 
 
+
+
+int main(){
+
+    struct node * map[NUM_ROWS][NUM_COLUMNS];
+
+    printf("\n\n****************\n START OF MAP: \n****************\n\n");
+    loadMap(map);
+
+    return 0;
+}
 
